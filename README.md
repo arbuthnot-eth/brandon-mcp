@@ -1,4 +1,5 @@
-# Brandon Arbuthnot - Developer Information MCP Server
+# Brandon Arbuthnot
+# Developer Information MCP Server
 
 This repository contains the code for an MCP (Model Context Protocol) server designed to provide professional information about Brandon Arbuthnot, a developer. This server acts as a structured interface to access contact details, portfolio links, and resume information via MCP-compatible clients.
 
@@ -26,17 +27,17 @@ This MCP server provides the following tools:
 
 This server is designed to be deployed on Cloudflare Workers.
 
-[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/BrandonMCP/brandon-mcp)
+[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/arbuthnot-eth/brandon-mcp)
 
 This will deploy your MCP server to a URL like: `brandon-arbuthnot-info-server.<your-account>.workers.dev/sse`
 
 Alternatively, you can use the command line below to get the remote MCP Server created on your local machine:
 
 ```bash
-npm create cloudflare@latest -- brandon-mcp --template=https://github.com/BrandonMCP/brandon-mcp
+npm create cloudflare@latest -- brandon-mcp --template=https://github.com/arbuthnot-eth/brandon-mcp
 ```
 
-*(Note: The template URL above assumes this repository is hosted at `https://github.com/BrandonMCP/brandon-mcp`. Update this URL if the repository location is different.)*
+*(Note: The template URL above assumes this repository is hosted at `https://github.com/arbuthnot-eth/brandon-mcp`. Update this URL if the repository location is different.)*
 
 ## Connecting to the Server
 
