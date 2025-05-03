@@ -1,33 +1,58 @@
-# Building a Remote MCP Server on Cloudflare (Without Auth)
+# Brandon Arbuthnot - Developer Information MCP Server
 
-This example allows you to deploy a remote MCP server that doesn't require authentication on Cloudflare Workers. 
+This repository contains the code for an MCP (Model Context Protocol) server designed to provide professional information about Brandon Arbuthnot, a developer. This server acts as a structured interface to access contact details, portfolio links, and resume information via MCP-compatible clients.
 
-## Get started: 
+## Purpose
 
-[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/ai/tree/main/demos/remote-mcp-authless)
+The primary goal of this server is to make it easy for others to programmatically access key professional details about Brandon Arbuthnot. It serves as a demonstration of using the Model Context Protocol to expose structured information.
 
-This will deploy your MCP server to a URL like: `remote-mcp-server-authless.<your-account>.workers.dev/sse`
+## Available Tools
+
+This MCP server provides the following tools:
+
+*   **`getContactInfo`**: Retrieves Brandon Arbuthnot's preferred professional contact method (e.g., email address).
+    *   *Input:* None
+    *   *Output:* Text containing contact information.
+*   **`getPortfolioLink`**: Retrieves the URL for Brandon Arbuthnot's online portfolio.
+    *   *Input:* None
+    *   *Output:* Text containing the portfolio URL.
+*   **`getResumeLink`**: Retrieves a link to Brandon Arbuthnot's resume.
+    *   *Input:* None
+    *   *Output:* Text containing the resume link.
+
+*(Note: The implementation of these tools in `src/index.ts` currently provides placeholder information. You will need to update the `src/index.ts` file with actual contact details and links.)*
+
+## Deployment
+
+This server is designed to be deployed on Cloudflare Workers.
+
+[![Deploy to Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/BrandonMCP/brandon-mcp)
+
+This will deploy your MCP server to a URL like: `brandon-arbuthnot-info-server.<your-account>.workers.dev/sse`
 
 Alternatively, you can use the command line below to get the remote MCP Server created on your local machine:
+
 ```bash
-npm create cloudflare@latest -- my-mcp-server --template=cloudflare/ai/demos/remote-mcp-authless
+npm create cloudflare@latest -- brandon-mcp --template=https://github.com/BrandonMCP/brandon-mcp
 ```
 
-## Customizing your MCP Server
+*(Note: The template URL above assumes this repository is hosted at `https://github.com/BrandonMCP/brandon-mcp`. Update this URL if the repository location is different.)*
 
-To add your own [tools](https://developers.cloudflare.com/agents/model-context-protocol/tools/) to the MCP server, define each tool inside the `init()` method of `src/index.ts` using `this.server.tool(...)`. 
+## Connecting to the Server
 
-## Connect to Cloudflare AI Playground
+You can connect to this MCP server from various MCP-compatible clients.
 
-You can connect to your MCP server from the Cloudflare AI Playground, which is a remote MCP client:
+### Cloudflare AI Playground
 
-1. Go to https://playground.ai.cloudflare.com/
-2. Enter your deployed MCP server URL (`remote-mcp-server-authless.<your-account>.workers.dev/sse`)
-3. You can now use your MCP tools directly from the playground!
+You can connect to your deployed MCP server from the Cloudflare AI Playground:
 
-## Connect Claude Desktop to your MCP server
+1.  Go to https://playground.ai.cloudflare.com/
+2.  Enter your deployed MCP server URL (e.g., `brandon-arbuthnot-info-server.<your-account>.workers.dev/sse`)
+3.  You can now use the `getContactInfo`, `getPortfolioLink`, and `getResumeLink` tools directly from the playground!
 
-You can also connect to your remote MCP server from local MCP clients, by using the [mcp-remote proxy](https://www.npmjs.com/package/mcp-remote). 
+### Claude Desktop
+
+You can also connect to your remote MCP server from local MCP clients, by using the [mcp-remote proxy](https://www.npmjs.com/package/mcp-remote).
 
 To connect to your MCP server from Claude Desktop, follow [Anthropic's Quickstart](https://modelcontextprotocol.io/quickstart/user) and within Claude Desktop go to Settings > Developer > Edit Config.
 
@@ -36,15 +61,19 @@ Update with this configuration:
 ```json
 {
   "mcpServers": {
-    "calculator": {
+    "brandonInfo": {
       "command": "npx",
       "args": [
         "mcp-remote",
-        "http://localhost:8787/sse"  // or remote-mcp-server-authless.your-account.workers.dev/sse
+        "http://localhost:8787/sse"  // or brandon-arbuthnot-info-server.your-account.workers.dev/sse
       ]
     }
   }
 }
 ```
 
-Restart Claude and you should see the tools become available. 
+Restart Claude and you should see the tools become available under the name `brandonInfo`.
+
+## Customization
+
+To update the actual contact information and links provided by the tools, edit the `src/index.ts` file and replace the placeholder text within the tool definitions.

@@ -5,55 +5,38 @@ import { z } from "zod";
 // Define our MCP agent with tools
 export class MyMCP extends McpAgent {
 	server = new McpServer({
-		name: "Authless Calculator",
+		name: "Brandon Arbuthnot Info Server",
 		version: "1.0.0",
 	});
 
 	async init() {
-		// Simple addition tool
+		// Tools to provide professional information about Brandon Arbuthnot
+
+		// Tool to get contact information
 		this.server.tool(
-			"add",
-			{ a: z.number(), b: z.number() },
-			async ({ a, b }) => ({
-				content: [{ type: "text", text: String(a + b) }],
+			"getContactInfo",
+			{}, // No input parameters needed
+			async () => ({
+				content: [{ type: "text", text: "Contact Brandon at [Your Email Address Here]" }], // Placeholder
 			})
 		);
 
-		// Calculator tool with multiple operations
+		// Tool to get portfolio link
 		this.server.tool(
-			"calculate",
-			{
-				operation: z.enum(["add", "subtract", "multiply", "divide"]),
-				a: z.number(),
-				b: z.number(),
-			},
-			async ({ operation, a, b }) => {
-				let result: number;
-				switch (operation) {
-					case "add":
-						result = a + b;
-						break;
-					case "subtract":
-						result = a - b;
-						break;
-					case "multiply":
-						result = a * b;
-						break;
-					case "divide":
-						if (b === 0)
-							return {
-								content: [
-									{
-										type: "text",
-										text: "Error: Cannot divide by zero",
-									},
-								],
-							};
-						result = a / b;
-						break;
-				}
-				return { content: [{ type: "text", text: String(result) }] };
-			}
+			"getPortfolioLink",
+			{}, // No input parameters needed
+			async () => ({
+				content: [{ type: "text", text: "Brandon's portfolio: [Your Portfolio URL Here]" }], // Placeholder
+			})
+		);
+
+		// Tool to get resume link
+		this.server.tool(
+			"getResumeLink",
+			{}, // No input parameters needed
+			async () => ({
+				content: [{ type: "text", text: "Brandon's resume: [Your Resume URL Here]" }], // Placeholder
+			})
 		);
 	}
 }
